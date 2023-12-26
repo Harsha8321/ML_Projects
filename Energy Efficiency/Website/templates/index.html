@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Energy Efficiency Prediction</title>
+    <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Sigmar+One&display=swap');
+    /* Basic Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #1a1919; 
+        color: #e2ead4; 
+    }
+
+    h1 {
+        font-family: 'Sigmar One', cursive; 
+        text-align: center;
+        color: #ffffff;
+        font-size: 3rem; 
+        margin-top: 30px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 4px #000000; 
+        letter-spacing: 1px;
+    }
+
+    h2 {
+        font-family: 'Sigmar One', cursive; /* Anime title font */
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px black; /* Text shadow for depth */
+    }
+
+    form {
+        background: #FFF; /* White background for contrast */
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    label {
+        display: block;
+        margin: 10px 0 5px;
+        color: #333; 
+        font-family: 'Nunito', sans-serif;
+        font-size: 1rem; 
+        font-weight: 700; 
+    }
+
+    input[type="text"], input[type="number"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus {
+        border-color: #DB2828; /* Red border for active input */
+    }
+
+    button {
+        width: calc(100% - 20px);
+        padding: 10px;
+        background-color: #DB2828; 
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    button:hover {
+        background-color: #A62222; /* Darker shade of red on hover */
+    }
+   
+    </style>
+</head>
+<body>
+
+<h1>Energy Efficiency Prediction</h1><br>
+<h2>Enter Specifications</h2>
+
+<form action="/predict" method="post" >
+    <label for="input1">Relative Compactness: </label>
+    <input type="text" name="input1" required>
+    <label for="input2">Surface Area: </label>
+    <input type="text" name="input2" required>
+    <label for="input3">Wall Area: </label>
+    <input type="text" name="input3" required>
+    <label for="input4">Roof Area: </label>
+    <input type="text" name="input4" required>
+    <label for="input5">Overall Height: </label>
+    <input type="text" name="input5" required>
+    <label for="input6">Orientation: </label>
+    <input type="text" name="input6" required>
+    <label for="input7">Glazing Area: </label>
+    <input type="text" name="input7" required>
+    <label for="input8">Glazing Area Distribution: </label>
+    <input type="text" name="input8" required> <br>
+    <br>
+    <button type="submit"><h4>PREDICT</h4></button>
+</form>
+
+<script>
+    function validateForm(event) {
+        // Select all input elements
+        let inputs = document.querySelectorAll('input[type="text"]');
+        let invalidFields = []; // Array to hold names of invalid fields
+
+        // Check each input
+        inputs.forEach(function(input) {
+            // Use a regular expression to test if the value is numeric
+            if (!/^(\d+\.?\d*|\.\d+)$/.test(input.value) && input.value.trim() !== "") {
+                invalidFields.push(input.name); // Add the field name to the array
+            }
+        });
+
+        // If there are any invalid fields, prevent submission and show alert
+        if (invalidFields.length > 0) {
+            event.preventDefault(); // Prevent the form from submitting
+            alert("Please enter integer values only in the following fields: " + invalidFields.join(", "));
+        }
+    }
+
+    // Add event listener for form submission
+    document.addEventListener('DOMContentLoaded', function() {
+        let form = document.querySelector('form'); // Assuming there's only one form
+        form.addEventListener('submit', validateForm);
+    });
+</script>
+
+</body>
+</html>
